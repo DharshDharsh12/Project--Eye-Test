@@ -1,5 +1,6 @@
 let randomBox;
 let alpha = 0.5;
+let score = 0;
 
 function createTiles(n) {
   let tiles = "";
@@ -26,7 +27,20 @@ function setBackgroundColor() {
 document.querySelector('.wrapper').addEventListener("click", function(ev) {
   let rc = ev.target.id.slice(1);
   if (rc == randomBox) {
+    score++;
+    document.getElementById("score").textContent = score;
     setBackgroundColor();
+  } else {
+    document.getElementById("scoreboard").innerHTML = `<p>Game Over! Your score is: <span id="score">${score}</span></p><button id="restartBtn">Restart</button>`;
+  }
+});
+
+document.body.addEventListener("click", function(ev) {
+  if (ev.target.id === "restartBtn") {
+    score = 0;
+    document.getElementById("score").textContent = score;
+    setBackgroundColor();
+    document.getElementById("scoreboard").innerHTML = `<p>Score: <span id="score">${score}</span></p><button id="restartBtn">Restart</button>`;
   }
 });
 
